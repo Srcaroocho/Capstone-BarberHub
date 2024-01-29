@@ -1,0 +1,47 @@
+/* Estilos para el contenedor principal */
+.component-container {
+  background-color: #333;
+}
+
+/* Estilos para la agenda-container */
+.agenda-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+  background-color: #333;
+  min-height: 100vh; /* Asegura que el contenedor abarque al menos la altura de la pantalla */
+  box-sizing: border-box; /* Incluye el relleno en el cálculo del tamaño */
+}
+
+/* Estilos para la primera columna (Calendario) */
+.column-1 {
+  flex: 1;
+  margin-right: 20px;
+  align-items: center; /* Alinea verticalmente al centro */
+}
+
+/* Estilos para la segunda columna (Formulario y Detalles) */
+.column-2 {
+  flex: 1;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column; /* Coloca los elementos uno debajo del otro */
+}
+
+/* Estilos para el contenedor del Formulario de Cita */
+.formulario-cita-container {
+  margin-bottom: 20px;
+  border: transparent;
+  border-radius: 50px; /* Agrega espacio entre el formulario y los detalles */
+}
+
+/* Estilos para el contenedor de Detalles de Cita */
+/*.detalle-cita-container { */
+  /* Puedes agregar estilos adicionales según sea necesario */
+/*}
+
+/* Estilos para el contenedor de la barra de navegación */
+.navbar-container {
+  background-color: #333;
+}

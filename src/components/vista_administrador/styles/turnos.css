@@ -1,0 +1,73 @@
+/* EmployeeSchedule.css */
+
+/* Estilos para el contenedor principal */
+.employee-schedule-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Estilos para el selector de empleado */
+  .employee-selector {
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos para la lista de turnos */
+  .schedule-list {
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos para el formulario de creación de turno */
+  .schedule-form {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+  }
+  
+  /* Estilos para los botones */
+  .schedule-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    margin-right: 8px;
+    cursor: pointer;
+  }
+  
+  .schedule-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Estilos para los encabezados */
+  h2 {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  
+  /* Estilos para los mensajes de texto */
+  p {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+  
+  /* Estilos para etiquetas y entradas de formulario */
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  input[type="date"],
+  input[type="time"],
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  /* Agrega más estilos según tus necesidades */
+  

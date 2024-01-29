@@ -1,0 +1,64 @@
+/* ServiceAssignment.css */
+
+/* Estilos para el contenedor principal */
+.service-assignment-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Estilos para el selector de empleado */
+.employee-selector {
+    margin-bottom: 20px;
+}
+
+/* Estilos para la lista de turnos */
+.schedule-list {
+    margin-bottom: 20px;
+}
+
+/* Estilos para el formulario de asignación de servicio */
+.service-form {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+}
+
+/* Estilos para los botones */
+.service-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.service-button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para los encabezados */
+h1 {
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+/* Estilos para etiquetas y selecciones de formulario */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Agrega más estilos según tus necesidades */

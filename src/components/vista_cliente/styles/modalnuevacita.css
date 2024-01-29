@@ -1,0 +1,126 @@
+/* Estilo para el overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+/* Estilo para el modal */
+.modal-nueva-cita-cliente {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  background-color: #fff;
+  padding: 20px;
+  z-index: 1001;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  max-height: 70vh; /* Establece la altura máxima según tus necesidades */
+  overflow-y: auto; /* Agrega la barra de desplazamiento vertical cuando sea necesario */
+}
+
+.modal-nueva-cita-cliente h2 {
+  color: #333;
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.detalle-horario-seleccionado {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* Botón genérico del modal */
+.modal-nueva-cita-cliente button {
+  border: none;
+  border-radius: 4px;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 8px;
+}
+
+/* Botón para cerrar el modal */
+.modal-nueva-cita-cliente .btn-cerrar {
+  background-color: #dc3545; /* Rojo */
+  float: left;
+  border-radius: 10px;
+}
+
+.modal-nueva-cita-cliente .btn-cerrar:hover {
+  background-color: #c82333; /* Rojo oscuro */
+}
+
+/* Botón para agendar la cita */
+.modal-nueva-cita-cliente .btn-agendar {
+  background-color: #28a745; /* Verde */
+  float: right;
+  border-radius: 10px;
+}
+
+.modal-nueva-cita-cliente .btn-agendar:hover {
+  background-color: #218838; /* Verde oscuro */
+}
+
+/* Estilo para el texto del empleado seleccionado */
+.detalle-empleado-seleccionado {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+/* Estilo para botones de servicios seleccionados */
+.modal-nueva-cita-cliente button.selected {
+  background-color: #007bff; /* Azul */
+  color: white;
+}
+
+/* Estilo para los radio buttons */
+.modal-nueva-cita-cliente label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.modal-nueva-cita-cliente input[type="radio"] {
+  margin-right: 5px;
+}
+
+/* Estilo para el campo de subir imagen */
+.modal-nueva-cita-cliente label[for="imageUpload"] {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Estilo para el catálogo de cortes */
+.catalogo-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Estilo para los botones de catálogo */
+.btn-ver-catalogo {
+  background-color: #007bff; /* Azul */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 8px;
+}
+
+.btn-ver-catalogo:hover {
+  background-color: #0056b3; /* Azul oscuro */
+}

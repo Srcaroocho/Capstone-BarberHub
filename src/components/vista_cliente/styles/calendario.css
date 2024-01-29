@@ -1,0 +1,71 @@
+/* Estilos base para el calendario */
+.calendario-cliente-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 30px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  font-family: "Poppins", sans-serif;
+  font-size: small;
+  width: 100%;
+  height: 650px; /* Altura predeterminada para pantallas grandes */
+}
+
+.button {
+  border-radius: 15px;
+  margin-top: 5px;
+}
+
+/* Estilos para el selector de peluquero */
+.selector-peluquero {
+  margin-bottom: 30px;
+  color:#fff;
+}
+
+#peluquero-select {
+  width: 100%;
+  margin-left: 12px;
+  margin-top: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Estilos para el modal */
+.modal {
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro transparente */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  width: 80%;
+  max-width: 600px; /* Ancho máximo para pantallas grandes */
+}
+
+/* Estilos para el botón "Cerrar" en el modal */
+.modal-close-button {
+  background-color: #ccc;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.modal-close-button:hover {
+  background-color: #999;
+}
+

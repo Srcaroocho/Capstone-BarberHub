@@ -1,0 +1,21 @@
+.dashboard {
+  display: grid;
+  grid-template-rows: repeat(2, auto); /* Dos filas */
+  grid-template-columns: repeat(3, 1fr); /* Tres columnas, todas con el mismo tamaño */
+  grid-template-areas:
+    "chart1 chart2 chart3"
+    "chart4 chart5 ."; /* El punto final representa un área vacía */
+  gap: 20px; /* Espacio entre los gráficos */
+  padding: 20px; /* Espacio alrededor de la cuadrícula */
+}
+
+.chart1 { grid-area: chart1; }
+.chart2 { grid-area: chart2; }
+.chart3 { grid-area: chart3; }
+.chart4 { grid-area: chart4; }
+.chart5 { grid-area: chart5; }
+
+.dashboard canvas {
+  width: 100% !important;
+  height: 300px !important;
+}

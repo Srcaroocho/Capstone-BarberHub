@@ -1,0 +1,29 @@
+.catalogo-cortes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  justify-content: center;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+  margin: auto;
+}
+
+.corte-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100px; /* Modifica el ancho del contenedor del corte */
+  height: 100px; /* Modifica la altura del contenedor del corte */
+}
+
+.corte-de-pelo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

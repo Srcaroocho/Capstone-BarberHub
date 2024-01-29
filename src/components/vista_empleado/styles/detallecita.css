@@ -1,0 +1,39 @@
+.detalle-cita-modal {
+  position: fixed;
+  top: 110px;
+  bottom: 20px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  right: 0;
+  width: 350px;
+  background: #FFFFFF;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  overflow-y: auto;
+  transform: translateX(0);
+  transition: transform 0.5s ease-in-out; /* Duración aumentada para una animación más suave */
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.modal-content {
+  text-align: left; /* Centrar el texto horizontalmente */
+  display: flex;
+  margin-left: 15px;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.close-button {
+  border: none;
+  background: none;
+  font-size: 24px;
+  cursor: pointer;
+}
