@@ -116,7 +116,7 @@ const EmployeeSchedule = () => {
       {selectedEmployee && (
         <div>
           <h2>
-            Turnos de{" "}
+            Turnos asignados
             {employeesData.find((emp) => emp.EmpleadoID === selectedEmployee)?.NombreCompleto}
           </h2>
           {employeeScheduleData[selectedEmployee] &&
@@ -150,7 +150,7 @@ const EmployeeSchedule = () => {
               </tbody>
             </table>
           ) : (
-            <p>No hay turnos disponibles para este empleado.</p>
+            <p>No hay turnos disponibles para este empleado</p>
           )}
 
           {isCreateFormVisible ? (

@@ -23,6 +23,11 @@
   color:#fff;
 }
 
+.selector-label{
+  font-weight: normal !important;
+}
+
+
 #peluquero-select {
   width: 100%;
   margin-left: 12px;
@@ -57,7 +62,7 @@
 
 /* Estilos para el botón "Cerrar" en el modal */
 .modal-close-button {
-  background-color: #ccc;
+  background-color:#ccc;
   border: none;
   border-radius: 5px;
   padding: 5px 10px;
@@ -67,5 +72,50 @@
 
 .modal-close-button:hover {
   background-color: #999;
+}
+
+.rbc-month-view{
+  border-radius: 5px !important;
+}
+
+.rbc-time-view{
+  border-radius: 5px !important;
+}
+
+.rbc-events-container{
+  cursor: pointer !important;
+}
+
+.rbc-event {
+  width: 100% !important;
+}
+
+.rbc-toolbar button{
+  font-size: 12px !important;
+}
+
+.rbc-toolbar .rbc-toolbar-label{
+  font-size: 13px !important;
+}
+
+.calendario-overlay-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.calendario-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5); /* Blanco con transparencia */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
 

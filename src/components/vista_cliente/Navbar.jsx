@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from "jwt-decode";
 import "../vista_cliente/styles/navbar.css";
 
 function Navbar() {
   const navigate = useNavigate();
+  const [nombreUsuario, setNombreUsuario] = useState(""); // Estado para almacenar el nombre de usuario
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accesToken");
+    if (accessToken) {
+      try {
+        const decodedToken = jwtDecode(accessToken);
+        if (decodedToken) {
+          const { Nombre } = decodedToken;
+          if (Nombre) setNombreUsuario(Nombre); // Establece el nombre de usuario en el estado
+        }
+      } catch (error) {
+        console.error("Error al decodificar el token:", error);
+      }
+    } else {
+      console.error("accessToken no encontrado en el localStorage.");
+    }
+  }, []); // El efecto se ejecuta solo una vez al montar el componente
 
   const handleSalir = () => {
     // Borrar el token de autenticación del localStorage
@@ -13,10 +32,6 @@ function Navbar() {
     navigate('/login');
   };
 
-  const handleNotificaciones = () => {
-    // Lógica para manejar notificaciones
-    console.log("Notificaciones");
-  };
 
   return (
     <nav className="navbar">
@@ -29,10 +44,8 @@ function Navbar() {
         <li>
           <img className="logo-barber-hub" src="/images/logo_barberhub.svg" alt="Logo BarberHub" />
         </li>
-        <li>
-          <button className="btn-notificaciones" onClick={handleNotificaciones}>
-            <img className="icon-notificaciones" src="/images/notifications_icon.png" alt="Icono Notificaciones" /> Notificaciones
-          </button>
+        <li className="bienvenida">
+          Hola, {nombreUsuario} {/* Muestra el nombre de usuario */}
         </li>
       </ul>
     </nav>

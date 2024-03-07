@@ -1,6 +1,6 @@
 /* Estilos para el contenedor principal */
 .component-container {
-  background-color: #333;
+  background-color: #000000;
 }
 
 /* Estilos para la agenda-container */
@@ -9,7 +9,7 @@
   justify-content: space-between;
   padding: 20px;
   font-family: "Poppins", sans-serif;
-  background-color: #333;
+  background-color: #000000;
   min-height: 100vh; /* Asegura que el contenedor abarque al menos la altura de la pantalla */
   box-sizing: border-box; /* Incluye el relleno en el cálculo del tamaño */
 }
@@ -43,5 +43,5 @@
 
 /* Estilos para el contenedor de la barra de navegación */
 .navbar-container {
-  background-color: #333;
+  background-color: #000000;
 }

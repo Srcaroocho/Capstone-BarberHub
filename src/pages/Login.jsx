@@ -7,10 +7,13 @@ import {
 } from "../api/apiService";
 import { jwtDecode } from "jwt-decode";
 import Lottie from "react-lottie";
+import { Toaster, toast } from "sonner";
 import animationData from "../animations/load_animation.json";
 import "../styles/login.css";
 
 const Login = () => {
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [isSignIn, setisSignIn] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [showNewForm, setShowNewForm] = useState(false);
   const [loginEmail, setLoginEmail] = useState("");
@@ -24,8 +27,7 @@ const Login = () => {
 
   const handleRegisterClick = async (event) => {
     event.preventDefault();
-    setIsActive(true);
-
+    setisSignIn(true);
     const userData = {
       contrasena: registerPassword,
       p_nombre: nombre,
@@ -37,35 +39,48 @@ const Login = () => {
 
     const registrationResult = await registerUser(userData);
 
+    setisSignIn(false);
+
     if (registrationResult) {
       console.log("Usuario registrado con éxito.", registrationResult);
+      toast.success("Usuario registrado con éxito");
       // Puedes redirigir al usuario a otra página o mostrar un mensaje de éxito
     } else {
       console.error("Fallo en el registro.");
-      // Puedes mostrar un mensaje de error al usuario
+      toast.error("Hubo un error al registrar el usuario");
+      // Muestra una alerta al usuario indicando que hubo un error en el registro
     }
+  };
+
+  const handleRegisterButtonClick = (event) => {
+    event.preventDefault();
+    setIsActive(true);
+    // Aquí puedes agregar el código para desplazar a la sección de registro
   };
 
   const handleLoginClick = async (event) => {
     event.preventDefault();
-    setIsActive(false);
+    setIsLoggingIn(true);
 
     const response = await authenticateUser(loginEmail, loginPassword);
     if (response) {
       console.log("Usuario autenticado con éxito. Token:", response);
     } else {
       console.error("Fallo de autenticación");
+      toast.error(
+        "Error al iniciar sesión. Verifica tu correo electrónico y contraseña."
+      );
     }
     const token = localStorage.getItem("accesToken");
     if (token) {
       const decodedToken = jwtDecode(token);
       console.log(decodedToken);
       if (decodedToken && decodedToken.RolID === 1) {
-        navigate("/cliente"); // Redirige al usuario a la ruta '/cliente' si el RolID es 1
+        navigate("/cliente");
       } else if (decodedToken && decodedToken.RolID === 2) {
-        navigate("/empleado"); // Redirige al usuario a la ruta '/empleado' si el RolID es 2
+        navigate("/empleado");
       } else if (decodedToken && decodedToken.RolID === 3) {
-        navigate("/admin"); // Redirige al usuario a la ruta '/admin' si el RolID es 3
+        navigate("/admin");
       } else {
         // Otra lógica si el RolID no coincide con ninguno de los casos anteriores
       }
@@ -74,6 +89,8 @@ const Login = () => {
     }
 
     setShowNewForm(false);
+    setIsActive(false);
+    setIsLoggingIn(false);
   };
 
   const handleBackToLoginClick = (event) => {
@@ -95,14 +112,17 @@ const Login = () => {
       console.log(
         "Contraseña restablecida con éxito. Se ha enviado un correo de confirmación."
       );
+      toast.success("Se ha enviado un correo para restablecer la contraseña");
     } else {
       console.error("Fallo al restablecer la contraseña.");
+      toast.error("El email ingresado no es valido");
     }
   };
 
   return (
     <div className="main-login">
       <div className={`container ${isActive ? "active" : ""}`} id="container">
+        <Toaster />
         <div className="form-container sign-up">
           <form>
             <h1>Crea tu cuenta</h1>
@@ -139,6 +159,22 @@ const Login = () => {
               onChange={(e) => setRegisterPassword(e.target.value)}
             />
             <input type="password" placeholder="Confirmar contraseña" />
+            {isSignIn && (
+              <div className="lottie-container-register">
+                <Lottie
+                  options={{
+                    loop: true,
+                    autoplay: true,
+                    animationData: animationData,
+                    rendererSettings: {
+                      preserveAspectRatio: "xMidYMid slice",
+                    },
+                  }}
+                  height={150}
+                  width={150}
+                />
+              </div>
+            )}
             <button onClick={handleRegisterClick}>Registrarse</button>
           </form>
         </div>
@@ -147,7 +183,7 @@ const Login = () => {
           {!showNewForm && (
             <form>
               <img src="/images/logo_barberhub.svg" alt="Logo BarberHub" />
-              <h1>BarberHub</h1>
+              <h1 className="sign-in-tittle">BarberHub</h1>
               <span>Por favor, introduce tus datos</span>
               <input
                 type="email"
@@ -161,6 +197,22 @@ const Login = () => {
                 value={loginPassword}
                 onChange={(e) => setLoginPassword(e.target.value)}
               />
+              {isLoggingIn && (
+                <div className="lottie-container">
+                  <Lottie
+                    options={{
+                      loop: true,
+                      autoplay: true,
+                      animationData: animationData,
+                      rendererSettings: {
+                        preserveAspectRatio: "xMidYMid slice",
+                      },
+                    }}
+                    height={150}
+                    width={150}
+                  />
+                </div>
+              )}
               <a onClick={handleForgotPasswordClick}>
                 ¿Olvidaste tu contraseña?
               </a>
@@ -195,7 +247,7 @@ const Login = () => {
         <div className="toggle-container">
           <div className="toggle">
             <div className="toggle-panel toggle-left">
-              <h1>¿Ya tienes cuenta?</h1>
+              <h1 className="toggle-panel-left-tittle">¿Ya tienes cuenta?</h1>
               <p>
                 Para regresar, haz clic en el botón que se encuentra más abajo
               </p>
@@ -208,7 +260,7 @@ const Login = () => {
               </button>
             </div>
             <div className="toggle-panel toggle-right">
-              <h1>Hola!</h1>
+              <h1 className="toggle-panel-tittle">Hola!</h1>
               <p>
                 ¿Aún no tienes cuenta? Regístrate haciendo clic en el botón que
                 se encuentra más abajo
@@ -216,7 +268,7 @@ const Login = () => {
               <button
                 className="hidden"
                 id="register"
-                onClick={handleRegisterClick}
+                onClick={handleRegisterButtonClick}
               >
                 Registrarse
               </button>

@@ -61,4 +61,29 @@ select {
     border-radius: 3px;
 }
 
-/* Agrega más estilos según tus necesidades */
+.service-selector select {
+    margin-bottom: 20px;
+  }
+  
+  #service-select{
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: "Poppins", sans-serif;
+  }
+
+.assign-service-button{
+    padding: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    color: #FFFFFF;
+    background-color: #000000;
+    border: transparent;
+    font-family: "Poppins", sans-serif;
+}
+
+.assign-service-button:hover{
+    background-color: #333;
+}

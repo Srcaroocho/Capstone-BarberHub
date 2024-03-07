@@ -1,7 +1,7 @@
 .catalogo-cortes {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 15px;
   justify-content: center;
   padding: 15px;
   background-color: #fff;
@@ -20,6 +20,10 @@
   overflow: hidden;
   width: 100px; /* Modifica el ancho del contenedor del corte */
   height: 100px; /* Modifica la altura del contenedor del corte */
+}
+
+.corte-container.selected {
+  border: 2px solid #007bff; /* Color de borde para resaltar la imagen seleccionada */
 }
 
 .corte-de-pelo {

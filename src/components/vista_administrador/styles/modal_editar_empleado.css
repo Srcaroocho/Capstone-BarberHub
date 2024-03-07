@@ -14,32 +14,24 @@
 
 /* Estilos para el modal */
 .modal-edit-empleado {
-  position: fixed;
-  z-index: 1000;
-  top: 50%;
-  left: 50%;
-  padding: 50px;
-  transform: translate(-50%, -50%);
-  background-color: rgba(255, 255, 255, 1);
-  border-radius: 8px;
+  position: relative;
+  background-color: #fff;
+  border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  width: 400px;
-  text-align: center;
+  width: 600px;
+  max-width: 90%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Estilos para el contenido del modal */
-.modal-content.edit-modal-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  width: 300px;
-  /* Ancho del modal */
-  text-align: center;
+.edit-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 /* Estilos para el botón de cerrar (la "x" en la esquina) */
@@ -53,26 +45,45 @@
 
 /* Estilos para los campos de entrada */
 .edit-input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
+  padding: 10px 15px;
+  font-size: 13px;
+  border-radius: 8px;
+  flex: 1;
+  margin-bottom: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  font-family: "Poppins", sans-serif;
+}
+
+.edit-input:focus {
+  outline: none;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2); /* Cambia el color de la sombra */
+}
+
+.edit-input-container {
+  display: flex;
+  width: 100%; /* Ajusta el ancho al 100% */
+  gap: 10px; /* Agrega espacio entre los elementos dentro del contenedor */
+}
+
+.edit-input-container-2 {
+  width: 100%; 
+  display: flex;
+  /* Ajusta el ancho al 100% */
 }
 
 /* Estilos para el botón de guardar cambios */
 .edit-button {
   padding: 10px 20px;
-  margin: 10px;
+  margin-top: 30px;
   border: none;
-  border-radius: 4px;
+  width: 100%;
+  border-radius: 8px;
   cursor: pointer;
-  background-color: #3498db;
-  /* Azul */
-  color: white;
+  font-family: "Poppins", sans-serif;
+  background-color: #000000 !important;
+  color: #ffffff;
 }
 
 .edit-button:hover {
-  background-color: #2980b9;
-  /* Azul más oscuro al pasar el mouse */
+  background-color: #333 !important;
 }

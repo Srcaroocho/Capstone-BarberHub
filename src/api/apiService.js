@@ -13,12 +13,11 @@ async function authenticateUser(username, password) {
       contrasena: password,
     });
     if (response.status === 200 && response.data) {
-      localStorage.setItem('accesToken', response.data.accesToken);
+      localStorage.setItem("accesToken", response.data.accesToken);
       return response.data;
     } else {
       return null;
     }
-
   } catch (error) {
     // Manejar errores de la solicitud (por ejemplo, problemas de red)
     console.error("Error de autenticación:", error);
@@ -32,6 +31,15 @@ export { authenticateUser };
 
 async function resetPassword(email) {
   try {
+    // Expresión regular para validar el formato del email
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Verificar si el email coincide con el formato esperado
+    if (!emailPattern.test(email)) {
+      console.error("El email proporcionado no es válido.");
+      return false;
+    }
+
     console.log(email);
 
     const response = await axios.post(`${url}/api/v1/auth/resetpassword`, {
@@ -118,33 +126,27 @@ export { fetchClientsData };
 // Función para actualizar los datos de un empleado CHECK
 
 async function updateEmployeeData(updatedEmployee) {
-  try {
-    const dataToSend = {
-      p_nombre: updatedEmployee.Nombre,
-      p_apellido: updatedEmployee.Apellido,
-      p_especialidad: updatedEmployee.Especialidad,
-      p_rol_id: 2,
-      p_email: updatedEmployee.email,
-    };
+  const dataToSend = {
+    p_nombre: updatedEmployee.Nombre,
+    p_apellido: updatedEmployee.Apellido,
+    p_especialidad: updatedEmployee.Especialidad,
+    p_rol_id: 2,
+    p_email: updatedEmployee.email,
+    p_estado: updatedEmployee.estado,
+  };
 
-    const response = await axios.patch(
-      `${url}/api/v1/empleado/${updatedEmployee.EmpleadoID}`,
-      dataToSend
-    );
+  const response = await axios.patch(
+    `${url}/api/v1/empleado/${updatedEmployee.EmpleadoID}`,
+    dataToSend
+  );
 
-    if (!response.data || !response.data["se actualizo el empleado"]) {
-      throw new Error("Error al actualizar los datos del empleado");
-    }
-
-    const empleadoActualizado = response.data["se actualizo el empleado"];
-    console.log("Datos enviados para modificar al empleado:", dataToSend);
-    console.log("Datos actualizados:", empleadoActualizado);
-
-    return empleadoActualizado;
-  } catch (error) {
-    console.error("Error al actualizar los datos del empleado:", error);
-    throw error;
+  const empleadoActualizado = response.data?.["se actualizo el empleado"];
+  if (!empleadoActualizado) {
+    throw new Error("Error al actualizar los datos del empleado");
   }
+
+  console.log("Datos enviados para modificar al empleado:", dataToSend);
+  return empleadoActualizado;
 }
 
 export { updateEmployeeData };
@@ -218,7 +220,10 @@ async function addScheduleData(newSchedule) {
       Nombre: newSchedule.Nombre, // Cambiado a "Nombre" para coincidir con la propiedad
     };
 
-    const response = await axios.post(`${url}/api/v1/empleado_turno`, formattedData);
+    const response = await axios.post(
+      `${url}/api/v1/empleado_turno`,
+      formattedData
+    );
 
     if (response.status === 200 || response.status === 201) {
       const jsonData = response.data;
@@ -226,7 +231,9 @@ async function addScheduleData(newSchedule) {
       return jsonData;
     } else {
       console.error("Error en la respuesta del servidor:", response.data);
-      throw new Error(`Error en la respuesta del servidor: Código de estado ${response.status}`);
+      throw new Error(
+        `Error en la respuesta del servidor: Código de estado ${response.status}`
+      );
     }
   } catch (error) {
     console.error("Error al crear el turno:", error);
@@ -241,17 +248,25 @@ export { addScheduleData };
 
 async function fetchEmployeeTurns(employeeID) {
   try {
-    const response = await axios.get(`${url}/api/v1/empleado_turno/${employeeID}`);
+    const response = await axios.get(
+      `${url}/api/v1/empleado_turno/${employeeID}`
+    );
 
     if (!response.data) {
       throw new Error("Error al obtener los datos de los turnos de empleados");
     }
 
     const jsonData = response.data;
-    console.log("Datos de los turnos de empleados recibidos de la API:", jsonData);
+    console.log(
+      "Datos de los turnos de empleados recibidos de la API:",
+      jsonData
+    );
     return jsonData;
   } catch (error) {
-    console.error("Error al obtener los datos de los turnos de empleados:", error);
+    console.error(
+      "Error al obtener los datos de los turnos de empleados:",
+      error
+    );
     throw error;
   }
 }
@@ -262,19 +277,21 @@ export { fetchEmployeeTurns };
 
 async function deleteScheduleData(turnoId) {
   try {
-    console.log('Enviando solicitud DELETE para el turno con ID:', turnoId);
-    
-    const response = await axios.delete(`${url}/api/v1/empleado_turno/${turnoId}`);
+    console.log("Enviando solicitud DELETE para el turno con ID:", turnoId);
+
+    const response = await axios.delete(
+      `${url}/api/v1/empleado_turno/${turnoId}`
+    );
 
     if (!response.data) {
       throw new Error("Error al eliminar los datos del turno");
     }
 
     // Aquí puedes manejar la respuesta o realizar cualquier otra acción que necesites
-    console.log('Datos del turno eliminados con éxito:', response.data);
+    console.log("Datos del turno eliminados con éxito:", response.data);
   } catch (error) {
     // Manejar errores en caso de que la solicitud de eliminación falle
-    console.error('Error al eliminar los datos del turno:', error);
+    console.error("Error al eliminar los datos del turno:", error);
     throw error;
   }
 }
@@ -285,9 +302,12 @@ export { deleteScheduleData };
 
 async function modifyScheduleData(turnoId, newData) {
   try {
-    console.log('Enviando solicitud PATCH para el turno con ID:', turnoId);
-    
-    const response = await axios.patch(`${url}/api/v1/empleado_turno/${turnoId}`, newData);
+    console.log("Enviando solicitud PATCH para el turno con ID:", turnoId);
+
+    const response = await axios.patch(
+      `${url}/api/v1/empleado_turno/${turnoId}`,
+      newData
+    );
 
     if (!response.data || response.status !== 200) {
       throw new Error("Error al modificar los datos del turno");
@@ -297,11 +317,11 @@ async function modifyScheduleData(turnoId, newData) {
     const turnoActualizado = response.data;
 
     // Aquí puedes manejar la respuesta o realizar cualquier otra acción que necesites
-    console.log('Datos del turno modificados con éxito:', turnoActualizado);
+    console.log("Datos del turno modificados con éxito:", turnoActualizado);
     return turnoActualizado; // Devuelve los datos actualizados del turno
   } catch (error) {
     // Manejar errores en caso de que la solicitud de modificación falle
-    console.error('Error al modificar los datos del turno:', error);
+    console.error("Error al modificar los datos del turno:", error);
     throw error;
   }
 }
@@ -312,14 +332,20 @@ export { modifyScheduleData };
 
 async function assignServiceToEmployee(employeeID, serviceID) {
   try {
-    console.log("Datos que se envían al servidor para asignar servicio a empleado:", { p_empleadoID: employeeID, p_servicioID: serviceID });
+    console.log(
+      "Datos que se envían al servidor para asignar servicio a empleado:",
+      { p_empleadoID: employeeID, p_servicioID: serviceID }
+    );
 
     const formattedData = {
       p_empleadoID: employeeID,
-      p_servicioID: serviceID
+      p_servicioID: serviceID,
     };
 
-    const response = await axios.post(`${url}/api/v1/empleado_servicio`, formattedData);
+    const response = await axios.post(
+      `${url}/api/v1/empleado_servicio`,
+      formattedData
+    );
 
     if (response.status === 200 || response.status === 201) {
       const jsonData = response.data;
@@ -327,7 +353,9 @@ async function assignServiceToEmployee(employeeID, serviceID) {
       return jsonData;
     } else {
       console.error("Error en la respuesta del servidor:", response.data);
-      throw new Error(`Error en la respuesta del servidor: Código de estado ${response.status}`);
+      throw new Error(
+        `Error en la respuesta del servidor: Código de estado ${response.status}`
+      );
     }
   } catch (error) {
     console.error("Error al asignar el servicio al empleado:", error);
@@ -341,7 +369,9 @@ export { assignServiceToEmployee };
 
 async function fetchEmployeesService(employeeID) {
   try {
-    const response = await axios.get(`${url}/api/v1/empleado_servicio/${employeeID}`);
+    const response = await axios.get(
+      `${url}/api/v1/empleado_servicio/${employeeID}`
+    );
 
     if (!response.data) {
       throw new Error("Error al obtener los datos");
@@ -358,9 +388,7 @@ async function fetchEmployeesService(employeeID) {
 
 export { fetchEmployeesService };
 
-
 // Funcion par abtener los datos de un servicio CHECK
-
 
 async function fetchServiceData(serviceID) {
   try {
@@ -381,33 +409,116 @@ async function fetchServiceData(serviceID) {
 
 export { fetchServiceData };
 
-// Funcion para crear una cita
+// Funcion para obtener todos los servicios
 
-async function addAppointmentData(newAppointment) {
+async function fetchAllService() {
   try {
-    const response = await axios.post(`${url}/api/v1/cita`, newAppointment);
+    const response = await axios.get(`${url}/api/v1/servicio`);
 
-    // Verificar si la respuesta es exitosa
-    if (response.status === 200 || response.status === 201) {
-      const jsonData = response.data;
-      console.log("Cita creada con éxito:", jsonData);
-      return jsonData;
-    } else {
-      throw new Error(
-        `Error en la respuesta del servidor: Código de estado ${response.status}`
-      );
+    if (!response.data) {
+      throw new Error("Error al obtener los datos");
     }
+
+    const jsonData = response.data;
+    console.log("Datos recibidos de la API:", jsonData);
+    return jsonData;
   } catch (error) {
-    // Mejora del manejo de errores
-    if (error.response) {
-      console.error("Error en la respuesta del servidor:", error.response);
-    } else if (error.request) {
-      console.error("No se recibió respuesta del servidor:", error.request);
-    } else {
-      console.error("Error al realizar la petición:", error.message);
-    }
+    console.error("Error al obtener los datos de los servicios:", error);
     throw error;
   }
 }
 
+export { fetchAllService };
+
+// Función para crear una cita CHECK
+
+async function addAppointmentData(newAppointmentData) {
+  const response = await axios.post(`${url}/api/v1/cita`, newAppointmentData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+
+  // Verificar si la respuesta es exitosa
+  if (response.status === 200 || response.status === 201) {
+    const jsonData = response.data;
+    console.log("Cita creada con éxito:", jsonData);
+    return jsonData;
+  } else {
+    throw new Error(
+      `Error en la respuesta del servidor: Código de estado ${response.status}`
+    );
+  }
+}
+
 export { addAppointmentData };
+
+// Función para obtener datos de las citas segun empleado ID
+
+async function fetchEmployeeAppointmentData(employeeID) {
+  try {
+    const response = await axios.get(`${url}/api/v1/cita/${employeeID}`);
+
+    if (!response.data) {
+      throw new Error("Error al obtener los datos");
+    }
+
+    const jsonData = response.data;
+    console.log("Datos recibidos de la API:", jsonData);
+    return jsonData;
+  } catch (error) {
+    console.error("Error al obtener los datos de las citas:", error);
+    throw error;
+  }
+}
+
+export { fetchEmployeeAppointmentData };
+
+// Funcion para obtener los datos de todas las citas
+
+async function fetchAppointmentData() {
+  try {
+    const response = await axios.get(`${url}/api/v1/cita`);
+
+    if (!response.data) {
+      throw new Error("Error al obtener los datos");
+    }
+
+    const jsonData = response.data;
+    return jsonData;
+  } catch (error) {
+    console.error("Error al obtener los datos de las citas:", error);
+    throw error;
+  }
+}
+
+export { fetchAppointmentData };
+
+// Funcion para actualizar datos de una cita
+
+async function updateAppointmentData(updatedAppointment) {
+  const { CitaID, Fecha, p_HoraInicio, p_HoraFin, p_Estado } =
+    updatedAppointment;
+
+  const dataToSend = {
+    Fecha,
+    p_HoraInicio,
+    p_HoraFin,
+    p_Estado,
+  };
+
+  try {
+    const response = await axios.patch(
+      `${url}/api/v1/cita/${CitaID}`,
+      dataToSend
+    );
+
+    console.log("Datos enviados para modificar la cita:", dataToSend);
+    return response.data; // Devuelve los datos actualizados de la cita
+  } catch (error) {
+    console.error("Error al actualizar los datos de la cita:", error);
+    throw new Error("Error al actualizar los datos de la cita");
+  }
+}
+
+export { updateAppointmentData };

@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { assignServiceToEmployee as assignService, fetchEmployeesData } from "../../api/apiService";
+import {
+  assignServiceToEmployee as assignService,
+  fetchEmployeesData,
+} from "../../api/apiService";
 import "./styles/servicios.css";
+import { Toaster, toast } from "sonner";
 
 const ServiceAssignment = () => {
   const [selectedEmployee, setSelectedEmployee] = useState("");
@@ -47,6 +51,7 @@ const ServiceAssignment = () => {
         const response = await assignService(selectedEmployee, serviceValue);
 
         if (response) {
+          toast.success("Servicio asignado con éxito");
           console.log("Servicio asignado con éxito:", response);
           // Puedes realizar acciones adicionales después de asignar el servicio si es necesario
         }
@@ -59,9 +64,13 @@ const ServiceAssignment = () => {
   };
 
   useEffect(() => {
-    const selectedEmployeeData = employeesData.find((employee) => employee.id === selectedEmployee);
+    const selectedEmployeeData = employeesData.find(
+      (employee) => employee.id === selectedEmployee
+    );
     if (selectedEmployeeData) {
-      setEmployeeName(`${selectedEmployeeData.Nombre} ${selectedEmployeeData.Apellido}`);
+      setEmployeeName(
+        `${selectedEmployeeData.Nombre} ${selectedEmployeeData.Apellido}`
+      );
     } else {
       setEmployeeName("");
     }
@@ -69,7 +78,9 @@ const ServiceAssignment = () => {
 
   return (
     <div>
-      <h1>Asignación de Servicios a Empleados</h1>
+      <Toaster />
+
+      <h1>Asignación de servicios</h1>
       <div className="employee-selector">
         <label htmlFor="employee-select">Seleccionar empleado:</label>
         <select
@@ -107,7 +118,12 @@ const ServiceAssignment = () => {
         </select>
       </div>
 
-      <button onClick={handleAssignServiceToEmployee}>Asignar Servicio</button>
+      <button
+        className="assign-service-button"
+        onClick={handleAssignServiceToEmployee}
+      >
+        Asignar Servicio
+      </button>
     </div>
   );
 };

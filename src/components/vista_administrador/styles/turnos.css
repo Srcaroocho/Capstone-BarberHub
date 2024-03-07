@@ -1,73 +1,122 @@
-/* EmployeeSchedule.css */
-
 /* Estilos para el contenedor principal */
 .employee-schedule-container {
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  /* Estilos para el selector de empleado */
-  .employee-selector {
-    margin-bottom: 20px;
-  }
-  
-  /* Estilos para la lista de turnos */
-  .schedule-list {
-    margin-bottom: 20px;
-  }
-  
-  /* Estilos para el formulario de creación de turno */
-  .schedule-form {
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f7f7f7;
-  }
-  
-  /* Estilos para los botones */
-  .schedule-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    margin-right: 8px;
-    cursor: pointer;
-  }
-  
-  .schedule-button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Estilos para los encabezados */
-  h2 {
-    font-size: 24px;
-    margin-bottom: 16px;
-  }
-  
-  /* Estilos para los mensajes de texto */
-  p {
-    font-size: 16px;
-    margin-bottom: 16px;
-  }
-  
-  /* Estilos para etiquetas y entradas de formulario */
-  label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-  }
-  
-  input[type="date"],
-  input[type="time"],
-  select {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 16px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-  }
-  
-  /* Agrega más estilos según tus necesidades */
-  
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 3px 0px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #fff;
+}
+
+/* Estilos para los encabezados */
+h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  background-color: transparent !important;
+  color: #333;
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+}
+
+/* Estilos para los mensajes de texto */
+p {
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+/* Estilos para etiquetas y entradas de formulario */
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+input[type="date"],
+input[type="time"],
+select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+/* Estilos para la lista de turnos */
+table {
+  width: 100%;
+  border-spacing: 0;
+  background-color: #fff;
+  border-radius: 15px;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  font-family: "Poppins", sans-serif;
+  font-size: small;
+}
+
+/* Estilos para los botones */
+button {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  border-radius: 5px;
+  border: transparent;
+  font-family: "Poppins", sans-serif;
+}
+
+.button:hover {
+  background-color: #f0f0f0;
+}
+
+/* Estilos para el formulario de creación de turno */
+.schedule-form {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 0 0 10px 10px;
+  background-color: #f7f7f7;
+}
+
+/* Estilos para el selector de empleado */
+.employee-selector select {
+  margin-bottom: 20px;
+}
+
+#employee-select{
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Estilos para el mensaje "No hay turnos disponibles" */
+.no-turnos {
+  font-size: 16px;
+  color: #888;
+}
+
+/* Estilos para el botón "Crear Turno" */
+.create-message {
+  font-size: 16px;
+  color: #333;
+}
+
+.create-message button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.create-message button:hover {
+  background-color: #0056b3;
+}

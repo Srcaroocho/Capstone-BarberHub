@@ -14,7 +14,7 @@ const Sidebar = ({ onCambioComponente }) => {
     <aside className="sidebar">
       <div className="sidebar-header">
         <img
-          src="/images/logo_barberhub.svg"
+          src="/images/w_logo_barberhub.svg"
           alt="Logo"
           className="sidebar-logo"
         />
@@ -23,7 +23,7 @@ const Sidebar = ({ onCambioComponente }) => {
       <div className="button-container">
         <button onClick={() => onCambioComponente("GeneralDashboard")}>
           <img
-            src="/images/overview_icon.png"
+            src="/images/w_overview_icon.png"
             alt="icon"
             className="sidebar-icon"
           />
@@ -31,7 +31,7 @@ const Sidebar = ({ onCambioComponente }) => {
         </button>
         <button onClick={() => onCambioComponente("EmployeeTable")}>
           <img
-            src="/images/employee_icon.png"
+            src="/images/w_employee_icon.png"
             alt="icon"
             className="sidebar-icon"
           />
@@ -39,7 +39,7 @@ const Sidebar = ({ onCambioComponente }) => {
         </button>
         <button onClick={() => onCambioComponente("EmployeeSchedule")}>
           <img
-            src="/images/shifts_icon.png"
+            src="/images/w_shifts_icon.png"
             alt="icon"
             className="sidebar-icon"
           />
@@ -47,7 +47,7 @@ const Sidebar = ({ onCambioComponente }) => {
         </button>
         <button onClick={() => onCambioComponente("ServiceAssignment")}>
           <img
-            src="/images/scissors_icon.png"
+            src="/images/w_scissors_icon.png"
             alt="icon"
             className="sidebar-icon"
           />
@@ -55,7 +55,7 @@ const Sidebar = ({ onCambioComponente }) => {
         </button>
         <button onClick={() => onCambioComponente("ClientTable")}>
           <img
-            src="/images/clients_icon.png"
+            src="/images/w_clients_icon.png"
             alt="icon"
             className="sidebar-icon"
           />
@@ -63,7 +63,7 @@ const Sidebar = ({ onCambioComponente }) => {
         </button>
         <button onClick={() => onCambioComponente("AppointmentTable")}>
           <img
-            src="/images/appointment_icon.png"
+            src="/images/w_appointment_icon.png"
             alt="icon"
             className="sidebar-icon"
           />
@@ -73,7 +73,7 @@ const Sidebar = ({ onCambioComponente }) => {
       <div>
         <button onClick={handleLogout}>
           <img
-            src="/images/log_out_icon.png"
+            src="/images/w_log_out_icon.png"
             alt="icon"
             className="sidebar-icon"
           />

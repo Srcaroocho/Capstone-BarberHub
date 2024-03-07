@@ -1,44 +1,51 @@
 import React, { useState, useEffect } from "react";
 import "./styles/employeetable.css";
 import EmployeeEditModal from "./ModalEditarEmpleado";
-import DeleteEmployee from "./ModalEliminarEmpleado";
 import EmployeeAddModal from "./ModalAgregarEmpleado";
-import { fetchEmployeesData, addEmployeeData } from "../../api/apiService";
+import {
+  fetchEmployeesData,
+  addEmployeeData,
+  updateEmployeeData,
+} from "../../api/apiService";
+import { Toaster, toast } from "sonner";
 
 const EmployeeTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedItems, setSelectedItems] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
-  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [isAddModalOpen, setAddModalOpen] = useState(false);
   const [employeesData, setEmployeesData] = useState([]);
   const itemsPerPage = 9;
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const jsonData = await fetchEmployeesData();
-        setEmployeesData(jsonData);
-      } catch (error) {
-        console.error("Error al obtener los datos de los empleados:", error);
-      }
-    }
     fetchData();
   }, []);
 
-  const filteredEmployees = Array.isArray(employeesData)
-    ? employeesData.filter(
-        (empleados) =>
-          empleados.Nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          empleados.Apellido.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          empleados.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          empleados.Especialidad.toLowerCase().includes(
-            searchTerm.toLowerCase()
-          )
-      )
-    : [];
+  const fetchData = async () => {
+    try {
+      const promise = async () => {
+        const jsonData = await fetchEmployeesData();
+        setEmployeesData(jsonData);
+      };
+
+      toast.promise(promise(), {
+        loading: "Cargando datos de los empleados...",
+        success: () => "Datos recibidos",
+        error: "Error al obtener los datos de los empleados",
+      });
+    } catch (error) {
+      console.error("Error al obtener los datos de los empleados:", error);
+    }
+  };
+
+  const filteredEmployees = employeesData.filter(
+    (employee) =>
+      employee.Nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      employee.Apellido.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      employee.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      employee.Especialidad.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const totalPages = Math.ceil(filteredEmployees.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -50,31 +57,14 @@ const EmployeeTable = () => {
 
   const handlePrevPage = () => {
     setCurrentPage((prev) => Math.max(prev - 1, 1));
-    clearSelections();
   };
 
   const handleNextPage = () => {
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
-    clearSelections();
   };
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
-    clearSelections();
-  };
-
-  const handleCheckboxChange = (id) => {
-    setSelectedItems((prevSelectedItems) => {
-      if (prevSelectedItems.includes(id)) {
-        return prevSelectedItems.filter((item) => item !== id);
-      } else {
-        return [...prevSelectedItems, id];
-      }
-    });
-  };
-
-  const clearSelections = () => {
-    setSelectedItems([]);
   };
 
   const handleSearchChange = (e) => {
@@ -93,8 +83,7 @@ const EmployeeTable = () => {
       if (response && response.empleado_id_agregado) {
         console.log("Empleado agregado exitosamente:", response);
         setAddModalOpen(false);
-        const jsonData = await fetchEmployeesData();
-        setEmployeesData(jsonData);
+        fetchData(); // Actualizar datos de empleados después de agregar
       } else {
         console.error("Error al agregar el empleado:", response);
       }
@@ -103,8 +92,25 @@ const EmployeeTable = () => {
     }
   };
 
+  const handleCheckboxChange = async (employeeId, currentState) => {
+    try {
+      const updatedState = !currentState;
+      const updatedEmployee = {
+        EmpleadoID: employeeId,
+        estado: updatedState,
+      };
+
+      await updateEmployeeData(updatedEmployee);
+      fetchData(); // Actualizar datos de empleados después de cambiar el estado
+    } catch (error) {
+      console.error("Error al actualizar el estado del empleado:", error);
+    }
+  };
+
   return (
     <div className="employee-table-container">
+      <Toaster />
+
       <div className="action-button-container">
         <input
           className="search-bar"
@@ -124,40 +130,38 @@ const EmployeeTable = () => {
             <th className="employee-table-heading">Apellido</th>
             <th className="employee-table-heading">Email</th>
             <th className="employee-table-heading">Especialidad</th>
+            <th className="employee-table-heading">Estado</th>
             <th className="employee-table-heading">Editar</th>
           </tr>
         </thead>
         <tbody className="employee-table-body">
-          {currentItems.map((empleados) => (
-            <tr key={empleados.EmpleadoID} className="employee-table-row">
-              <td className="employee-table-cell">{empleados.Nombre}</td>
-              <td className="employee-table-cell">{empleados.Apellido}</td>
-              <td className="employee-table-cell">{empleados.email}</td>
-              <td className="employee-table-cell">{empleados.Especialidad}</td>
+          {currentItems.map((employee) => (
+            <tr key={employee.EmpleadoID} className="employee-table-row">
+              <td className="employee-table-cell">{employee.Nombre}</td>
+              <td className="employee-table-cell">{employee.Apellido}</td>
+              <td className="employee-table-cell">{employee.email}</td>
+              <td className="employee-table-cell">{employee.Especialidad}</td>
+              <td className="employee-table-cell">
+                <input
+                  className="theme-checkbox"
+                  type="checkbox"
+                  onChange={() =>
+                    handleCheckboxChange(employee.EmpleadoID, employee.Estado)
+                  }
+                  checked={employee.Estado} // Esto establecerá el estado del checkbox basado en el estado del empleado
+                />
+              </td>
               <td className="employee-table-cell">
                 <div className="edit-field">
                   <button
                     className="table-edit-button"
                     onClick={() => {
-                      setSelectedEmployee(empleados);
+                      setSelectedEmployee(employee);
                       setEditModalOpen(true);
                     }}
                   >
                     <img
                       src="/images/edit_icon.png"
-                      alt="icon"
-                      className="edit-icon"
-                    />
-                  </button>
-                  <button
-                    className="table-edit-button"
-                    onClick={() => {
-                      setSelectedEmployee(empleados);
-                      setDeleteModalOpen(true);
-                    }}
-                  >
-                    <img
-                      src="/images/delete_icon.png"
                       alt="icon"
                       className="edit-icon"
                     />
@@ -204,16 +208,14 @@ const EmployeeTable = () => {
         employee={selectedEmployee}
         isOpen={isEditModalOpen}
         onClose={() => setEditModalOpen(false)}
+        onUpdate={fetchData} // Pasar la función onUpdate que actualiza los datos de los empleados
       />
-      <DeleteEmployee
-        employee={selectedEmployee}
-        isOpen={isDeleteModalOpen}
-        onClose={() => setDeleteModalOpen(false)}
-      />
+
       <EmployeeAddModal
         isOpen={isAddModalOpen}
         onClose={() => setAddModalOpen(false)}
-        onEmployeeAdded={fetchEmployeesData}
+        onEmployeeAdded={handleAddEmployee}
+        onUpdate={fetchData} // Pasar la función onUpdate que actualiza los datos de los empleados        // Pasar la función para manejar la adición de empleados
       />
     </div>
   );

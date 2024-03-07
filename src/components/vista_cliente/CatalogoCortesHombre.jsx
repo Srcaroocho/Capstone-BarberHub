@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import cortePelo1 from './catalogo/hombre/crew_cut.png';
 import cortePelo2 from './catalogo/hombre/degradado_bald_fade.png';
 import cortePelo3 from './catalogo/hombre/degradado_blowout.png';
@@ -8,7 +8,6 @@ import cortePelo6 from './catalogo/hombre/degradado_mid_fade.png';
 import cortePelo7 from './catalogo/hombre/degradado_militar.png';
 import cortePelo8 from './catalogo/hombre/degradado_mullet_fade.png';
 import cortePelo9 from './catalogo/hombre/degrado_drop_fade.png';
-// Importa otras imágenes si es necesario
 import "../vista_cliente/styles/catalogocorteshombres.css";
 
 const CatalogoCortesHombre = ({ onImageSelect }) => {
@@ -22,11 +21,14 @@ const CatalogoCortesHombre = ({ onImageSelect }) => {
     cortePelo7,
     cortePelo8,
     cortePelo9,
-    // Agrega más imágenes importadas aquí
   ];
 
-  const handleImageSelect = (imagen) => {
-    onImageSelect(imagen); // Llama a la función pasada como prop
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+
+  const handleImageSelect = (index) => {
+    const selectedImage = cortesDePelo[index];
+    setSelectedImageIndex(index); // Actualiza el estado con el índice de la imagen seleccionada
+    onImageSelect(selectedImage); // Pasa la imagen correspondiente al índice seleccionado
   };
 
   return (
@@ -34,8 +36,8 @@ const CatalogoCortesHombre = ({ onImageSelect }) => {
       {cortesDePelo.map((imagen, index) => (
         <div
           key={index}
-          className="corte-container"
-          onClick={() => handleImageSelect(imagen)} // Llama a la función al hacer clic
+          className={`corte-container ${selectedImageIndex === index ? 'selected' : ''}`} // Aplica una clase de CSS si la imagen está seleccionada
+          onClick={() => handleImageSelect(index)} // Llama a la función al hacer clic
         >
           <img
             src={imagen}

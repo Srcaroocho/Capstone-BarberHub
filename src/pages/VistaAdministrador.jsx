@@ -7,6 +7,8 @@ import ClientTable from '../components/vista_administrador/ClientTable';
 import EmployeeSchedule from '../components/vista_administrador/Turnos';
 import ServiceAssignment from '../components/vista_administrador/Servicios';
 import GeneralDashboard from '../components/vista_administrador/GeneralDashboard';
+import AppointmentTable from '../components/vista_administrador/AppointmentTable';
+
 // Importa aquí los otros componentes como AppointmentTable si es necesario
 
 const DashboardPage = () => {
@@ -19,6 +21,8 @@ const DashboardPage = () => {
         'ClientTable': 'Lista de clientes',
         'EmployeeSchedule': 'Turnos',
         'ServiceAssignment': 'Servicios',
+        'AppointmentTable': 'Lista de citas',
+
         // 'AppointmentTable': 'Citas', // Descomenta y añade más según sea necesario
     };
 
@@ -33,6 +37,7 @@ const DashboardPage = () => {
                     {componenteActivo === 'ClientTable' && <ClientTable />}
                     {componenteActivo === 'EmployeeSchedule' && <EmployeeSchedule />}
                     {componenteActivo === 'ServiceAssignment' && <ServiceAssignment />}
+                    {componenteActivo === 'AppointmentTable' && <AppointmentTable />}
                     {/* {componenteActivo === 'AppointmentTable' && <AppointmentTable />} */}
                     {/* Añade aquí más condiciones para otros componentes si los tienes */}
                 </div>

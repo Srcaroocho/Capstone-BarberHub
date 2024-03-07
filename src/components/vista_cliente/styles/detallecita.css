@@ -4,14 +4,16 @@
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 10px;
+    margin-top: 30px;
   }
   
   /* Estilos para el título del detalle de la cita */
   .detalle-cita-container h2 {
-    font-size: 18px;
+    font-size: 25px;
+    display: flex;
     font-weight: bold;
     margin-bottom: 10px;
+    justify-content: center;
   }
   
   /* Estilos para los párrafos de detalles de la cita */
@@ -20,3 +22,51 @@
     margin-bottom: 10px;
   }
   
+ .container-imagen-corte{
+  display: flex;
+  justify-content: center;
+ } 
+
+.imagen-corte{
+  border-radius: 15px;
+  margin-top: 30px;
+  max-width: 500px;
+  max-height: 500px;
+}
+
+.container-horario-cita{
+  display: flex;
+  margin-top: 20px;
+  width: 100% !important;
+  gap: 25%;
+}
+
+.btn-modal-detalle-cita{
+  padding: 10px 20px;
+  border: none;
+  margin-top: 30px;
+  width: 50%;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.btn-edit-container{
+  display: flex;
+  gap: 90px; 
+  width: 100%;
+}
+
+.btn-edit-detalle-cita{
+  padding: 10px 20px;
+  border: none;
+  margin-top: 30px;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  background-color: #000000;
+  color: #ffffff;
+}
